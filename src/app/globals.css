@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4f1e8;
+  --paper-dim: #eae5d6;
+  --ink: #1c231b;
+  --ink-soft: #4a5245;
+  --green-deep: #1f3327;
+  --green: #33513c;
+  --green-mid: #5c7a5e;
+  --ochre: #a8763a;
+  --ochre-light: #d3a765;
+  --clay: #9a3d2e;
+  --line: #d8d0ba;
+  --line-dark: #33432f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-green-deep: var(--green-deep);
+  --color-green: var(--green);
+  --color-green-mid: var(--green-mid);
+  --color-ochre: var(--ochre);
+  --color-ochre-light: var(--ochre-light);
+  --color-clay: var(--clay);
+  --color-line: var(--line);
+  --color-line-dark: var(--line-dark);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-plex);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-plex), sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), serif;
+}
