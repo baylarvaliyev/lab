@@ -33,16 +33,14 @@ export default function Nav() {
         }`}
       >
         <Link href="/" className="flex items-center gap-3 focus-ring rounded-xl">
-          <div className="rounded-full bg-ink p-1">
-            <Image
-              src="/images/logo.png"
-              alt="Torpaq, Su və Bitki Analizləri Laboratoriyası"
-              width={36}
-              height={36}
-              className="h-9 w-9 object-contain"
-              priority
-            />
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt="Torpaq, Su və Bitki Analizləri Laboratoriyası"
+            width={40}
+            height={40}
+            className="h-10 w-10 object-contain"
+            priority
+          />
           <span className="hidden font-display text-[14px] font-semibold leading-tight tracking-tight text-ink sm:block">
             Torpaq · Su · Bitki
             <br />
