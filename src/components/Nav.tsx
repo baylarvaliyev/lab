@@ -41,8 +41,10 @@ export default function Nav() {
             className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
             priority
           />
-          <span className="min-w-0 truncate font-display text-[13px] font-semibold leading-tight tracking-tight text-ink sm:hidden">
-            Torpaq, Su və Bitki Analizləri
+          <span className="min-w-0 font-display text-[12px] font-semibold leading-[1.2] tracking-tight text-ink sm:hidden">
+            Torpaq, Su və Bitki
+            <br />
+            Analizləri Laboratoriyası
           </span>
           <span className="hidden font-display text-[14px] font-semibold leading-tight tracking-tight text-ink sm:block">
             Torpaq · Su · Bitki
