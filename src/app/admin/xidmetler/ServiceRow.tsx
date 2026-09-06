@@ -32,26 +32,26 @@ export default function ServiceRow({ service }: { service: Service }) {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="focus-ring w-full rounded-sm border border-line bg-paper px-3 py-2 text-[14.5px] text-ink outline-none"
+          className="focus-ring w-full rounded-lg border border-line bg-bg-elev px-3 py-2 text-[14.5px] text-ink outline-none"
         />
         <textarea
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           rows={2}
           placeholder="Qısa izah (opsional)"
-          className="focus-ring mt-2 w-full rounded-sm border border-line bg-paper px-3 py-2 text-[13.5px] text-ink outline-none"
+          className="focus-ring mt-2 w-full rounded-lg border border-line bg-bg-elev px-3 py-2 text-[13.5px] text-ink outline-none"
         />
         <div className="mt-2 flex gap-3">
           <button
             onClick={handleSave}
             disabled={isPending}
-            className="focus-ring rounded-sm bg-green px-4 py-1.5 text-[13.5px] font-medium text-paper hover:bg-green-deep"
+            className="focus-ring rounded-full bg-lime px-4 py-1.5 text-[13.5px] font-semibold text-bg"
           >
             Yadda saxla
           </button>
           <button
             onClick={() => setEditing(false)}
-            className="focus-ring text-[13.5px] text-ink-soft hover:underline"
+            className="focus-ring text-[13.5px] text-ink-dim hover:underline"
           >
             İmtina
           </button>
@@ -63,27 +63,27 @@ export default function ServiceRow({ service }: { service: Service }) {
   return (
     <div className="flex items-center justify-between gap-4 px-4 py-3">
       <div className="min-w-0">
-        <p className={`truncate text-[14.5px] ${service.active ? "text-ink" : "text-ink-soft line-through"}`}>
+        <p className={`truncate text-[14.5px] ${service.active ? "text-ink" : "text-ink-dimmer line-through"}`}>
           {service.name_az}
         </p>
         {service.is_package && (
-          <span className="text-[11.5px] font-medium text-ochre">Paket</span>
+          <span className="text-[11.5px] font-medium text-gold">Paket</span>
         )}
       </div>
       <div className="flex shrink-0 items-center gap-3 text-[13px]">
         <button
           onClick={handleToggle}
           disabled={isPending}
-          className={`focus-ring rounded-sm px-2.5 py-1 font-medium ${
-            service.active ? "bg-green/15 text-green-deep" : "bg-ink-soft/15 text-ink-soft"
+          className={`focus-ring rounded-full px-2.5 py-1 font-medium ${
+            service.active ? "bg-emerald/15 text-emerald" : "bg-ink-dimmer/15 text-ink-dim"
           }`}
         >
           {service.active ? "Aktiv" : "Deaktiv"}
         </button>
-        <button onClick={() => setEditing(true)} className="focus-ring text-ink-soft hover:text-ink">
+        <button onClick={() => setEditing(true)} className="focus-ring text-ink-dim hover:text-ink">
           Düzəliş
         </button>
-        <button onClick={handleDelete} className="focus-ring text-clay hover:underline">
+        <button onClick={handleDelete} className="focus-ring text-gold hover:underline">
           Sil
         </button>
       </div>

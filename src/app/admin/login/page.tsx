@@ -33,14 +33,15 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-green-deep px-5">
-      <div className="w-full max-w-sm rounded-sm border border-paper/10 bg-paper px-8 py-10">
-        <p className="text-sm font-medium text-clay">Admin panel</p>
-        <h1 className="mt-1 font-display text-2xl text-ink">Daxil ol</h1>
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-bg px-5">
+      <div className="glow-lime pointer-events-none absolute -left-40 top-10 h-[380px] w-[380px] rounded-full blur-3xl" />
+      <div className="glass relative w-full max-w-sm rounded-2xl px-8 py-10">
+        <p className="text-sm font-medium text-lime-soft">Admin panel</p>
+        <h1 className="mt-1 font-display text-2xl font-semibold text-ink">Daxil ol</h1>
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <div>
-            <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="email">
+            <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="email">
               E-poçt
             </label>
             <input
@@ -48,11 +49,11 @@ export default function AdminLoginPage() {
               name="email"
               type="email"
               required
-              className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+              className="focus-ring mt-1.5 w-full rounded-xl border border-line bg-bg-elev px-3.5 py-2.5 text-[15px] text-ink outline-none"
             />
           </div>
           <div>
-            <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="password">
+            <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="password">
               Şifrə
             </label>
             <input
@@ -60,16 +61,16 @@ export default function AdminLoginPage() {
               name="password"
               type="password"
               required
-              className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+              className="focus-ring mt-1.5 w-full rounded-xl border border-line bg-bg-elev px-3.5 py-2.5 text-[15px] text-ink outline-none"
             />
           </div>
 
-          {error && <p className="text-[14px] text-clay" role="alert">{error}</p>}
+          {error && <p className="text-[14px] text-gold" role="alert">{error}</p>}
 
           <button
             type="submit"
             disabled={loading}
-            className="focus-ring w-full rounded-sm bg-green px-6 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-green-deep disabled:opacity-60"
+            className="focus-ring w-full rounded-full bg-lime px-6 py-3 text-[15px] font-semibold text-bg transition-transform hover:scale-[1.02] disabled:opacity-60"
           >
             {loading ? "Yoxlanılır..." : "Daxil ol"}
           </button>

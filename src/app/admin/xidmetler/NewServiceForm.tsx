@@ -25,9 +25,9 @@ export default function NewServiceForm({ categoryId }: { categoryId: string }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Yeni xidmət adı"
-        className="focus-ring min-w-[220px] flex-1 rounded-sm border border-line bg-paper px-3 py-2 text-[14px] text-ink outline-none"
+        className="focus-ring min-w-[220px] flex-1 rounded-xl border border-line bg-bg-elev px-3 py-2 text-[14px] text-ink outline-none"
       />
-      <label className="flex items-center gap-1.5 text-[13px] text-ink-soft">
+      <label className="flex items-center gap-1.5 text-[13px] text-ink-dim">
         <input
           type="checkbox"
           checked={isPackage}
@@ -38,7 +38,7 @@ export default function NewServiceForm({ categoryId }: { categoryId: string }) {
       <button
         type="submit"
         disabled={isPending}
-        className="focus-ring rounded-sm border border-green px-4 py-2 text-[13.5px] font-medium text-green-deep hover:bg-green hover:text-paper"
+        className="focus-ring rounded-full border border-lime px-4 py-2 text-[13.5px] font-medium text-lime-soft hover:bg-lime hover:text-bg"
       >
         Əlavə et
       </button>

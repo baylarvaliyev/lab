@@ -33,17 +33,17 @@ export default function StatusForm({
   }
 
   return (
-    <div className="rounded-sm border border-line bg-paper px-6 py-6">
-      <h2 className="font-display text-lg text-green-deep">Status və qeyd</h2>
+    <div className="glass rounded-2xl px-6 py-6">
+      <h2 className="font-display text-lg font-semibold text-ink">Status və qeyd</h2>
       <div className="mt-4">
-        <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="status">
+        <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="status">
           Status
         </label>
         <select
           id="status"
           value={statusValue}
           onChange={(e) => setStatusValue(e.target.value)}
-          className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+          className="focus-ring mt-1.5 w-full rounded-xl border border-line bg-bg-elev px-3.5 py-2.5 text-[15px] text-ink outline-none"
         >
           {options.map((o) => (
             <option key={o.value} value={o.value}>
@@ -53,7 +53,7 @@ export default function StatusForm({
         </select>
       </div>
       <div className="mt-4">
-        <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="note">
+        <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="note">
           Daxili qeyd
         </label>
         <textarea
@@ -61,13 +61,13 @@ export default function StatusForm({
           rows={3}
           value={noteValue}
           onChange={(e) => setNoteValue(e.target.value)}
-          className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+          className="focus-ring mt-1.5 w-full rounded-xl border border-line bg-bg-elev px-3.5 py-2.5 text-[15px] text-ink outline-none"
         />
       </div>
       <button
         onClick={handleSave}
         disabled={isPending}
-        className="focus-ring mt-4 rounded-sm bg-green px-5 py-2.5 text-[14.5px] font-medium text-paper hover:bg-green-deep disabled:opacity-60"
+        className="focus-ring mt-4 rounded-full bg-lime px-5 py-2.5 text-[14.5px] font-semibold text-bg hover:scale-105 transition-transform disabled:opacity-60"
       >
         {isPending ? "Yadda saxlanılır..." : saved ? "Yadda saxlanıldı ✓" : "Yadda saxla"}
       </button>

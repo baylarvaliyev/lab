@@ -10,10 +10,10 @@ const statusLabel: Record<string, string> = {
 };
 
 const statusColor: Record<string, string> = {
-  yeni: "bg-clay text-paper",
-  baxilir: "bg-ochre text-ink",
-  cavablandirilib: "bg-green text-paper",
-  baglanib: "bg-ink-soft text-paper",
+  yeni: "bg-gold text-bg",
+  baxilir: "bg-emerald/80 text-bg",
+  cavablandirilib: "bg-lime text-bg",
+  baglanib: "bg-ink-dimmer text-bg",
 };
 
 export default async function MuraciyetlerPage() {
@@ -26,11 +26,11 @@ export default async function MuraciyetlerPage() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl text-ink">Müraciətlər</h1>
+      <h1 className="font-display text-3xl font-semibold text-ink">Müraciətlər</h1>
 
-      <div className="mt-8 overflow-x-auto rounded-sm border border-line bg-paper">
+      <div className="glass mt-8 overflow-x-auto rounded-2xl">
         <table className="w-full text-left text-[14px]">
-          <thead className="border-b border-line bg-paper-dim text-[12.5px] uppercase tracking-wide text-ink-soft">
+          <thead className="border-b border-line-soft text-[12.5px] uppercase tracking-wide text-ink-dim">
             <tr>
               <th className="px-4 py-3 font-medium">Tarix</th>
               <th className="px-4 py-3 font-medium">Ad, soyad</th>
@@ -41,8 +41,8 @@ export default async function MuraciyetlerPage() {
           </thead>
           <tbody>
             {(submissions ?? []).map((s) => (
-              <tr key={s.id} className="border-b border-line last:border-0 hover:bg-paper-dim">
-                <td className="px-4 py-3 text-ink-soft">
+              <tr key={s.id} className="border-b border-line-soft last:border-0 hover:bg-glass-strong">
+                <td className="px-4 py-3 text-ink-dim">
                   {new Date(s.created_at).toLocaleDateString("az-AZ")}
                 </td>
                 <td className="px-4 py-3">
@@ -52,12 +52,12 @@ export default async function MuraciyetlerPage() {
                   >
                     {s.full_name}
                   </Link>
-                  {s.company && <span className="ml-1 text-ink-soft">({s.company})</span>}
+                  {s.company && <span className="ml-1 text-ink-dim">({s.company})</span>}
                 </td>
-                <td className="px-4 py-3 text-ink-soft">{s.phone}</td>
-                <td className="px-4 py-3 text-ink-soft">{s.service_interest || "--"}</td>
+                <td className="px-4 py-3 text-ink-dim">{s.phone}</td>
+                <td className="px-4 py-3 text-ink-dim">{s.service_interest || "--"}</td>
                 <td className="px-4 py-3">
-                  <span className={`rounded-sm px-2 py-1 text-[12px] font-medium ${statusColor[s.status]}`}>
+                  <span className={`rounded-full px-2.5 py-1 text-[12px] font-medium ${statusColor[s.status]}`}>
                     {statusLabel[s.status]}
                   </span>
                 </td>
@@ -65,7 +65,7 @@ export default async function MuraciyetlerPage() {
             ))}
             {(submissions ?? []).length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-10 text-center text-ink-soft">
+                <td colSpan={5} className="px-4 py-10 text-center text-ink-dim">
                   Hələ heç bir müraciət yoxdur.
                 </td>
               </tr>

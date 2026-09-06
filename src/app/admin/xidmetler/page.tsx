@@ -13,8 +13,8 @@ export default async function AdminXidmetlerPage() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl text-ink">Xidmətlər</h1>
-      <p className="mt-2 max-w-xl text-[14.5px] text-ink-soft">
+      <h1 className="font-display text-3xl font-semibold text-ink">Xidmətlər</h1>
+      <p className="mt-2 max-w-xl text-[14.5px] text-ink-dim">
         Xidmətləri aktiv/deaktiv edin, adını dəyişin və ya yeni xidmət əlavə
         edin. Deaktiv xidmətlər sayta çıxmır.
       </p>
@@ -24,13 +24,13 @@ export default async function AdminXidmetlerPage() {
           const items = (services ?? []).filter((s) => s.category_id === cat.id);
           return (
             <section key={cat.id}>
-              <h2 className="font-display text-xl text-green-deep">{cat.name_az}</h2>
-              <div className="mt-3 divide-y divide-line rounded-sm border border-line bg-paper">
+              <h2 className="font-display text-xl font-semibold text-lime-soft">{cat.name_az}</h2>
+              <div className="glass mt-3 divide-y divide-line-soft rounded-2xl">
                 {items.map((s) => (
                   <ServiceRow key={s.id} service={s} />
                 ))}
                 {items.length === 0 && (
-                  <p className="px-4 py-4 text-[14px] text-ink-soft">
+                  <p className="px-4 py-4 text-[14px] text-ink-dim">
                     Bu kateqoriyada xidmət yoxdur.
                   </p>
                 )}

@@ -36,32 +36,32 @@ export default async function SubmissionDetailPage({
 
   return (
     <div className="max-w-2xl">
-      <h1 className="font-display text-3xl text-ink">{submission.full_name}</h1>
-      <p className="mt-1 text-[14px] text-ink-soft">
+      <h1 className="font-display text-3xl font-semibold text-ink">{submission.full_name}</h1>
+      <p className="mt-1 text-[14px] text-ink-dim">
         {new Date(submission.created_at).toLocaleString("az-AZ")}
       </p>
 
-      <dl className="mt-8 grid grid-cols-[140px_1fr] gap-y-3 rounded-sm border border-line bg-paper px-6 py-6 text-[14.5px]">
-        <dt className="text-ink-soft">Telefon</dt>
+      <dl className="glass mt-8 grid grid-cols-[140px_1fr] gap-y-3 rounded-2xl px-6 py-6 text-[14.5px]">
+        <dt className="text-ink-dim">Telefon</dt>
         <dd>
           <a className="focus-ring rounded hover:underline" href={`tel:${submission.phone}`}>
             {submission.phone}
           </a>
         </dd>
 
-        <dt className="text-ink-soft">E-poçt</dt>
+        <dt className="text-ink-dim">E-poçt</dt>
         <dd>{submission.email || "--"}</dd>
 
-        <dt className="text-ink-soft">Şirkət</dt>
+        <dt className="text-ink-dim">Şirkət</dt>
         <dd>{submission.company || "--"}</dd>
 
-        <dt className="text-ink-soft">Xidmət</dt>
+        <dt className="text-ink-dim">Xidmət</dt>
         <dd>{submission.service_interest || "--"}</dd>
 
-        <dt className="text-ink-soft">Mesaj</dt>
+        <dt className="text-ink-dim">Mesaj</dt>
         <dd className="whitespace-pre-wrap">{submission.message || "--"}</dd>
 
-        <dt className="text-ink-soft">Fayllar</dt>
+        <dt className="text-ink-dim">Fayllar</dt>
         <dd>
           {filesWithUrls.length === 0 && "--"}
           <ul className="space-y-1">
@@ -72,7 +72,7 @@ export default async function SubmissionDetailPage({
                     href={f.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="focus-ring rounded font-medium text-green-deep hover:underline"
+                    className="focus-ring rounded font-medium text-lime-soft hover:underline"
                   >
                     {f.file_name}
                   </a>

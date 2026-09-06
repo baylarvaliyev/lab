@@ -66,9 +66,9 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-sm border border-green bg-green-deep/5 px-6 py-8 text-center">
-        <p className="font-display text-xl text-green-deep">Təşəkkür edirik!</p>
-        <p className="mt-2 text-[15px] text-ink-soft">
+      <div className="rounded-xl border border-emerald/30 bg-emerald/10 px-6 py-8 text-center">
+        <p className="font-display text-xl font-semibold text-emerald">Təşəkkür edirik!</p>
+        <p className="mt-2 text-[15px] text-ink-dim">
           Sorğunuz qəbul edildi. Komandamız qısa zamanda sizinlə əlaqə
           saxlayacaq.
         </p>
@@ -76,31 +76,39 @@ export default function ContactForm() {
     );
   }
 
+  const inputClass =
+    "focus-ring mt-1.5 w-full rounded-xl border border-line bg-bg-elev px-3.5 py-2.5 text-[15px] text-ink outline-none placeholder:text-ink-dimmer";
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Ad, soyad *" name="full_name" required />
-        <Field label="Telefon *" name="phone" type="tel" required />
+        <Field label="Ad, soyad *" name="full_name" required inputClass={inputClass} />
+        <Field label="Telefon *" name="phone" type="tel" required inputClass={inputClass} />
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="E-poçt" name="email" type="email" />
-        <Field label="Şirkət (B2B üçün)" name="company" />
+        <Field label="E-poçt" name="email" type="email" inputClass={inputClass} />
+        <Field label="Şirkət (B2B üçün)" name="company" inputClass={inputClass} />
       </div>
-      <Field label="Maraqlandığınız xidmət" name="service_interest" placeholder="Məsələn: Torpaq analizi -- Paket 2" />
+      <Field
+        label="Maraqlandığınız xidmət"
+        name="service_interest"
+        placeholder="Məsələn: Torpaq analizi -- Paket 2"
+        inputClass={inputClass}
+      />
       <div>
-        <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="message">
+        <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="message">
           Mesajınız
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
-          className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+          className={inputClass}
           placeholder="Nümunə haqqında məlumat, sahənin yeri, sifariş edilən analiz sayı və s."
         />
       </div>
       <div>
-        <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor="file">
+        <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="file">
           Fayl əlavə edin (sahənin şəkli, sənəd -- opsional)
         </label>
         <input
@@ -108,12 +116,12 @@ export default function ContactForm() {
           name="file"
           type="file"
           onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="focus-ring mt-1.5 w-full text-[14px] text-ink-soft file:mr-4 file:rounded-sm file:border-0 file:bg-green file:px-4 file:py-2 file:text-[13.5px] file:font-medium file:text-paper hover:file:bg-green-deep"
+          className="focus-ring mt-1.5 w-full text-[14px] text-ink-dim file:mr-4 file:rounded-full file:border-0 file:bg-lime file:px-4 file:py-2 file:text-[13.5px] file:font-semibold file:text-bg"
         />
       </div>
 
       {status === "error" && (
-        <p className="text-[14px] text-clay" role="alert">
+        <p className="text-[14px] text-gold" role="alert">
           {errorMsg}
         </p>
       )}
@@ -121,7 +129,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="focus-ring rounded-sm bg-green px-6 py-3 text-[15px] font-medium text-paper transition-colors hover:bg-green-deep disabled:opacity-60"
+        className="focus-ring rounded-full bg-lime px-7 py-3.5 text-[15px] font-semibold text-bg transition-transform hover:scale-105 disabled:opacity-60"
       >
         {status === "submitting" ? "Göndərilir..." : "Sorğunu göndər"}
       </button>
@@ -135,16 +143,18 @@ function Field({
   type = "text",
   required,
   placeholder,
+  inputClass,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
   placeholder?: string;
+  inputClass: string;
 }) {
   return (
     <div>
-      <label className="block text-[13.5px] font-medium text-ink-soft" htmlFor={name}>
+      <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor={name}>
         {label}
       </label>
       <input
@@ -153,7 +163,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="focus-ring mt-1.5 w-full rounded-sm border border-line bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none"
+        className={inputClass}
       />
     </div>
   );

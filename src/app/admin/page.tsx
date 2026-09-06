@@ -19,17 +19,17 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="font-display text-3xl text-ink">İcmal</h1>
+      <h1 className="font-display text-3xl font-semibold text-ink">İcmal</h1>
       <div className="mt-8 grid gap-5 sm:grid-cols-3">
-        <StatCard label="Yeni müraciətlər" value={newCount ?? 0} accent="clay" />
-        <StatCard label="Ümumi müraciətlər" value={totalCount ?? 0} accent="green" />
-        <StatCard label="Aktiv xidmətlər" value={serviceCount ?? 0} accent="ochre" />
+        <StatCard label="Yeni müraciətlər" value={newCount ?? 0} accent="gold" />
+        <StatCard label="Ümumi müraciətlər" value={totalCount ?? 0} accent="lime" />
+        <StatCard label="Aktiv xidmətlər" value={serviceCount ?? 0} accent="emerald" />
       </div>
 
       <div className="mt-10">
         <Link
           href="/admin/muraciyetler"
-          className="focus-ring inline-block rounded-sm bg-green px-5 py-2.5 text-[14.5px] font-medium text-paper hover:bg-green-deep"
+          className="focus-ring inline-block rounded-full bg-lime px-5 py-2.5 text-[14.5px] font-semibold text-bg hover:scale-105 transition-transform"
         >
           Bütün müraciətlərə bax
         </Link>
@@ -45,18 +45,18 @@ function StatCard({
 }: {
   label: string;
   value: number;
-  accent: "clay" | "green" | "ochre";
+  accent: "gold" | "lime" | "emerald";
 }) {
   const accentClass = {
-    clay: "text-clay",
-    green: "text-green-deep",
-    ochre: "text-ochre",
+    gold: "text-gold",
+    lime: "text-lime-soft",
+    emerald: "text-emerald",
   }[accent];
 
   return (
-    <div className="rounded-sm border border-line bg-paper px-6 py-6">
-      <p className="text-[13.5px] text-ink-soft">{label}</p>
-      <p className={`mt-2 font-display text-4xl ${accentClass}`}>{value}</p>
+    <div className="glass rounded-2xl px-6 py-6">
+      <p className="text-[13.5px] text-ink-dim">{label}</p>
+      <p className={`mt-2 font-display text-4xl font-semibold ${accentClass}`}>{value}</p>
     </div>
   );
 }

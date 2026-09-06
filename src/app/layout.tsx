@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Fraunces, IBM_Plex_Sans } from "next/font/google";
+import { Sora, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-const fraunces = Fraunces({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  variable: "--font-sora",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const plex = IBM_Plex_Sans({
@@ -30,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="az">
-      <body className={`${fraunces.variable} ${plex.variable} antialiased`}>
+      <body className={`${sora.variable} ${plex.variable} antialiased`}>
         <Nav />
         <main>{children}</main>
         <Footer />
