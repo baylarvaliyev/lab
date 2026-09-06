@@ -32,15 +32,18 @@ export default function Nav() {
           scrolled ? "glass" : "border border-transparent bg-transparent"
         }`}
       >
-        <Link href="/" className="flex items-center gap-3 focus-ring rounded-xl">
+        <Link href="/" className="flex min-w-0 items-center gap-2.5 focus-ring rounded-xl sm:gap-3">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-v2.png"
             alt="Torpaq, Su və Bitki Analizləri Laboratoriyası"
             width={40}
             height={40}
-            className="h-10 w-10 object-contain"
+            className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
             priority
           />
+          <span className="min-w-0 truncate font-display text-[13px] font-semibold leading-tight tracking-tight text-ink sm:hidden">
+            Torpaq, Su və Bitki Analizləri
+          </span>
           <span className="hidden font-display text-[14px] font-semibold leading-tight tracking-tight text-ink sm:block">
             Torpaq · Su · Bitki
             <br />
