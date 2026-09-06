@@ -1,5 +1,5 @@
 import Link from "next/link";
-import HeroCanvas from "@/components/three/HeroCanvas";
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import { createClient } from "@/lib/supabase/server";
 import type { ServiceCategory } from "@/lib/types";
@@ -52,8 +52,16 @@ export default async function Home() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <div className="relative aspect-square w-full">
-              <HeroCanvas className="h-full w-full" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-line sm:aspect-square">
+              <Image
+                src="/images/campus.jpg"
+                alt="Bakı Mühəndislik Universiteti kampusu"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/40 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>
