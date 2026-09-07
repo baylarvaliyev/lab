@@ -4,15 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-const links = [
-  { href: "/", label: "Ana səhifə" },
-  { href: "/xidmetler", label: "Xidmətlər" },
-  { href: "/haqqimizda", label: "Haqqımızda" },
-  { href: "/elaqe", label: "Əlaqə" },
-];
-
-export default function Nav() {
+export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -23,7 +19,12 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (pathname?.startsWith("/admin")) return null;
+  const links = [
+    { href: `/${locale}`, label: dict.nav.home },
+    { href: `/${locale}/xidmetler`, label: dict.nav.services },
+    { href: `/${locale}/haqqimizda`, label: dict.nav.about },
+    { href: `/${locale}/elaqe`, label: dict.nav.contact },
+  ];
 
   return (
     <header className="fixed top-0 z-50 w-full px-4 pt-4 sm:px-6">
@@ -32,7 +33,7 @@ export default function Nav() {
           scrolled ? "glass" : "border border-transparent bg-transparent"
         }`}
       >
-        <Link href="/" className="flex min-w-0 items-center gap-2.5 focus-ring rounded-xl sm:gap-3">
+        <Link href={`/${locale}`} className="flex min-w-0 items-center gap-2.5 focus-ring rounded-xl sm:gap-3">
           <Image
             src="/images/logo-v2.png"
             alt="Torpaq, Su və Bitki Analizləri Laboratoriyası"
@@ -67,24 +68,30 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
+          <div className="ml-1">
+            <LanguageSwitcher locale={locale} />
+          </div>
           <Link
-            href="/elaqe"
+            href={`/${locale}/elaqe`}
             className="focus-ring ml-2 rounded-full bg-lime px-5 py-2 text-[14px] font-semibold text-bg transition-transform hover:scale-105"
           >
-            Sifariş ver
+            {dict.nav.order}
           </Link>
         </nav>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="focus-ring rounded-full p-2 md:hidden"
-          aria-label={open ? "Menyunu bağla" : "Menyunu aç"}
-          aria-expanded={open}
-        >
-          <span className="block h-0.5 w-6 bg-ink" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-ink" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-ink" />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher locale={locale} />
+          <button
+            onClick={() => setOpen(!open)}
+            className="focus-ring rounded-full p-2"
+            aria-label={open ? "Menyunu bağla" : "Menyunu aç"}
+            aria-expanded={open}
+          >
+            <span className="block h-0.5 w-6 bg-ink" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-ink" />
+            <span className="mt-1.5 block h-0.5 w-6 bg-ink" />
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -100,11 +107,11 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/elaqe"
+            href={`/${locale}/elaqe`}
             onClick={() => setOpen(false)}
             className="focus-ring mt-2 block rounded-full bg-lime px-4 py-2.5 text-center text-[14px] font-semibold text-bg"
           >
-            Sifariş ver
+            {dict.nav.order}
           </Link>
         </nav>
       )}

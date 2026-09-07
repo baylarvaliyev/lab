@@ -2,13 +2,15 @@
 
 import { useState, type FormEvent } from "react";
 import { createClient } from "@/lib/supabase/client";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function ContactForm() {
+export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const f = dict.contact.form;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -58,20 +60,15 @@ export default function ContactForm() {
     } catch (err) {
       console.error(err);
       setStatus("error");
-      setErrorMsg(
-        "Sorğu göndərilmədi. Zəhmət olmasa bir az sonra yenidən cəhd edin və ya telefonla əlaqə saxlayın."
-      );
+      setErrorMsg(f.error);
     }
   }
 
   if (status === "success") {
     return (
       <div className="rounded-xl border border-emerald/30 bg-emerald/10 px-6 py-8 text-center">
-        <p className="font-display text-xl font-semibold text-emerald">Təşəkkür edirik!</p>
-        <p className="mt-2 text-[15px] text-ink-dim">
-          Sorğunuz qəbul edildi. Komandamız qısa zamanda sizinlə əlaqə
-          saxlayacaq.
-        </p>
+        <p className="font-display text-xl font-semibold text-emerald">{f.successTitle}</p>
+        <p className="mt-2 text-[15px] text-ink-dim">{f.successBody}</p>
       </div>
     );
   }
@@ -82,34 +79,34 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Ad, soyad *" name="full_name" required inputClass={inputClass} />
-        <Field label="Telefon *" name="phone" type="tel" required inputClass={inputClass} />
+        <Field label={f.fullName} name="full_name" required inputClass={inputClass} />
+        <Field label={f.phone} name="phone" type="tel" required inputClass={inputClass} />
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="E-poçt" name="email" type="email" inputClass={inputClass} />
-        <Field label="Şirkət (B2B üçün)" name="company" inputClass={inputClass} />
+        <Field label={f.email} name="email" type="email" inputClass={inputClass} />
+        <Field label={f.company} name="company" inputClass={inputClass} />
       </div>
       <Field
-        label="Maraqlandığınız xidmət"
+        label={f.serviceInterest}
         name="service_interest"
-        placeholder="Məsələn: Torpaq analizi -- Paket 2"
+        placeholder={f.serviceInterestPlaceholder}
         inputClass={inputClass}
       />
       <div>
         <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="message">
-          Mesajınız
+          {f.message}
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           className={inputClass}
-          placeholder="Nümunə haqqında məlumat, sahənin yeri, sifariş edilən analiz sayı və s."
+          placeholder={f.messagePlaceholder}
         />
       </div>
       <div>
         <label className="block text-[13.5px] font-medium text-ink-dim" htmlFor="file">
-          Fayl əlavə edin (sahənin şəkli, sənəd -- opsional)
+          {f.file}
         </label>
         <input
           id="file"
@@ -131,7 +128,7 @@ export default function ContactForm() {
         disabled={status === "submitting"}
         className="focus-ring rounded-full bg-lime px-7 py-3.5 text-[15px] font-semibold text-bg transition-transform hover:scale-105 disabled:opacity-60"
       >
-        {status === "submitting" ? "Göndərilir..." : "Sorğunu göndər"}
+        {status === "submitting" ? f.submitting : f.submit}
       </button>
     </form>
   );

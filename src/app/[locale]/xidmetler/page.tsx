@@ -1,13 +1,23 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import { createClient } from "@/lib/supabase/server";
 import type { Service, ServiceCategory } from "@/lib/types";
+import { isLocale, localized, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
-export const metadata: Metadata = { title: "Xidmətlər | Laboratoriya" };
 export const revalidate = 60;
 
-export default async function XidmetlerPage() {
+export default async function XidmetlerPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: rawLocale } = await params;
+  if (!isLocale(rawLocale)) notFound();
+  const locale: Locale = rawLocale;
+  const dict = getDictionary(locale);
+
   const supabase = await createClient();
 
   const [{ data: categories }, { data: services }] = await Promise.all([
@@ -26,13 +36,12 @@ export default async function XidmetlerPage() {
 
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
-          <p className="text-sm font-medium text-lime-soft">Xidmətlərimiz</p>
+          <p className="text-sm font-medium text-lime-soft">{dict.services.eyebrow}</p>
           <h1 className="mt-2 max-w-2xl font-display text-4xl font-semibold tracking-tight text-ink">
-            Aqrokimyəvi analiz istiqamətləri
+            {dict.services.title}
           </h1>
           <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-dim">
-            Aşağıdakı bütün analizlər üzrə qiymət təklifi üçün bizimlə əlaqə
-            saxlayın -- fərdi nümunə sayına və paketə görə qiymət təyin olunur.
+            {dict.services.lead}
           </p>
         </Reveal>
 
@@ -44,12 +53,14 @@ export default async function XidmetlerPage() {
               <Reveal key={cat.id} delay={ci * 0.04}>
                 <section id={cat.slug} className="scroll-mt-28">
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-4">
-                    <h2 className="font-display text-2xl font-semibold text-ink">{cat.name_az}</h2>
+                    <h2 className="font-display text-2xl font-semibold text-ink">
+                      {localized(cat, "name", locale)}
+                    </h2>
                     <Link
-                      href="/elaqe"
+                      href={`/${locale}/elaqe`}
                       className="focus-ring rounded text-[14px] font-medium text-lime-soft hover:underline"
                     >
-                      Bu bölmə üzrə sifariş ver &rarr;
+                      {dict.services.orderSection} &rarr;
                     </Link>
                   </div>
                   <ul className="mt-5 grid gap-x-6 gap-y-3 sm:grid-cols-2">
@@ -67,7 +78,7 @@ export default async function XidmetlerPage() {
                             s.is_package ? "bg-gold" : "bg-emerald"
                           }`}
                         />
-                        {s.name_az}
+                        {localized(s, "name", locale)}
                       </li>
                     ))}
                   </ul>

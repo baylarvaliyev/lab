@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
-import Nav from "@/components/Nav";
-import Footer from "@/components/Footer";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -22,6 +20,9 @@ export const metadata: Metadata = {
     "Bakı Mühəndislik Universitetinin Torpaq, Su və Bitki Analizləri Laboratoriyası -- torpaq, suvarma suyu və bitki nümunələrində aqrokimyəvi analizlər.",
 };
 
+// Global shell shared by both the locale-prefixed public site and the
+// (single-language) /admin area. Nav/Footer live in the [locale] layout
+// instead, since /admin doesn't use either.
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,11 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="az">
-      <body className={`${sora.variable} ${plex.variable} antialiased`}>
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <body className={`${sora.variable} ${plex.variable} antialiased`}>{children}</body>
     </html>
   );
 }

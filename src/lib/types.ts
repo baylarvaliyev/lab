@@ -3,6 +3,12 @@ export type ServiceCategory = {
   slug: string;
   name_az: string;
   description_az: string | null;
+  name_en?: string | null;
+  name_ru?: string | null;
+  name_nl?: string | null;
+  description_en?: string | null;
+  description_ru?: string | null;
+  description_nl?: string | null;
   sort_order: number;
 };
 
@@ -11,6 +17,9 @@ export type Service = {
   category_id: string;
   name_az: string;
   description_az: string | null;
+  name_en?: string | null;
+  name_ru?: string | null;
+  name_nl?: string | null;
   is_package: boolean;
   sort_order: number;
   active: boolean;
