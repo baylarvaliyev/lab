@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="focus-ring flex items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[13px] font-medium text-ink-dim transition-colors hover:text-ink"
+        className="focus-ring flex items-center gap-1.5 rounded-full border border-line px-3.5 py-2.5 text-[15px] font-medium text-ink-dim transition-colors hover:text-ink"
         aria-haspopup="listbox"
         aria-expanded={open}
       >

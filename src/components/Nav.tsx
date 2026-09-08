@@ -29,8 +29,8 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
   return (
     <header className="fixed top-0 z-50 w-full px-4 pt-4 sm:px-6">
       <div
-        className={`glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all sm:px-6 ${
-          scrolled ? "" : "bg-bg/25"
+        className={`glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3.5 transition-all sm:px-6 ${
+          scrolled ? "bg-bg/80" : "bg-bg/55"
         }`}
       >
         <Link href={`/${locale}`} className="flex min-w-0 items-center gap-2.5 focus-ring rounded-xl sm:gap-3">
@@ -42,12 +42,12 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
             className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
             priority
           />
-          <span className="min-w-0 font-display text-[12px] font-semibold leading-[1.2] tracking-tight text-ink sm:hidden">
+          <span className="min-w-0 font-display text-[13px] font-semibold leading-[1.2] tracking-tight text-ink sm:hidden">
             Torpaq, Su və Bitki
             <br />
             Analizləri Laboratoriyası
           </span>
-          <span className="hidden font-display text-[14px] font-semibold leading-tight tracking-tight text-ink sm:block">
+          <span className="hidden font-display text-[16px] font-semibold leading-tight tracking-tight text-ink sm:block">
             Torpaq · Su · Bitki
             <br />
             <span className="text-ink-dim">Analizləri Laboratoriyası</span>
@@ -59,7 +59,7 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
             <Link
               key={l.href}
               href={l.href}
-              className={`focus-ring rounded-full px-4 py-2 text-[14px] transition-colors ${
+              className={`focus-ring rounded-full px-4 py-2.5 text-[16px] font-medium transition-colors ${
                 pathname === l.href
                   ? "bg-glass-strong text-ink"
                   : "text-ink-dim hover:text-ink"
@@ -73,7 +73,7 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
           </div>
           <Link
             href={`/${locale}/elaqe`}
-            className="focus-ring ml-2 rounded-full bg-lime px-5 py-2 text-[14px] font-semibold text-bg transition-transform hover:scale-105"
+            className="focus-ring ml-2 rounded-full bg-lime px-5 py-2.5 text-[16px] font-semibold text-bg transition-transform hover:scale-105"
           >
             {dict.nav.order}
           </Link>
@@ -95,13 +95,13 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
       </div>
 
       {open && (
-        <nav className="glass mx-auto mt-2 max-w-6xl rounded-2xl px-5 py-4 md:hidden">
+        <nav className="glass mx-auto mt-2 max-w-6xl rounded-2xl bg-bg/85 px-5 py-4 md:hidden">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="focus-ring block rounded-lg py-2.5 text-[15px] text-ink-dim"
+              className="focus-ring block rounded-lg py-3 text-[17px] font-medium text-ink-dim"
             >
               {l.label}
             </Link>
@@ -109,7 +109,7 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
           <Link
             href={`/${locale}/elaqe`}
             onClick={() => setOpen(false)}
-            className="focus-ring mt-2 block rounded-full bg-lime px-4 py-2.5 text-center text-[14px] font-semibold text-bg"
+            className="focus-ring mt-2 block rounded-full bg-lime px-4 py-3 text-center text-[16px] font-semibold text-bg"
           >
             {dict.nav.order}
           </Link>
