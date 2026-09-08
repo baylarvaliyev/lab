@@ -32,7 +32,7 @@
   --color-gold: var(--gold);
   --color-line: var(--line);
   --color-line-soft: var(--line-soft);
-  --font-display: var(--font-sora);
+  --font-display: var(--font-plex);
   --font-body: var(--font-plex);
 }
 
@@ -74,7 +74,8 @@ body::before {
 }
 
 .font-display {
-  font-family: var(--font-sora), sans-serif;
+  font-family: var(--font-plex), sans-serif;
+  letter-spacing: -0.01em;
 }
 
 .glass {

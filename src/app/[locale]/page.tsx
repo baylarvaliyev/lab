@@ -65,13 +65,13 @@ export default async function Home({
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/10" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg/70 via-transparent to-transparent" />
 
-        <div className="relative flex h-full max-w-6xl flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-24">
+        <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-6 pb-16 pt-36 sm:px-10 sm:pb-24 lg:px-14">
           <Reveal>
             <p className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-bg/40 px-4 py-1.5 text-[13px] text-ink-dim backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-lime" />
               {dict.home.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-2xl font-display text-[2.6rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-[4.2rem]">
+            <h1 className="mt-5 max-w-2xl font-display text-[2.6rem] font-bold leading-[1.03] tracking-tight text-ink sm:text-[4.2rem]">
               {dict.home.titleA} <span className="text-gradient">{dict.home.titleHighlight}</span> {dict.home.titleB}
             </h1>
             <p className="mt-6 max-w-md text-[16px] leading-relaxed text-ink-dim">

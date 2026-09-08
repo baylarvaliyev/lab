@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Sora, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
+// A single typeface (IBM Plex Sans) for both display and body text.
+// We tried pairing it with a separate display font (Sora) earlier, but
+// Sora is missing the Azerbaijani schwa glyph (ə), which made the browser
+// silently fall back to a mismatched system font mid-headline. Plex Sans
+// has full coverage, confirmed by the body text rendering correctly --
+// headings just lean on heavier weights instead of a different typeface.
 const plex = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-plex",
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="az">
-      <body className={`${sora.variable} ${plex.variable} antialiased`}>{children}</body>
+      <body className={`${plex.variable} antialiased`}>{children}</body>
     </html>
   );
 }

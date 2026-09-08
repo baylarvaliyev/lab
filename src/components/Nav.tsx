@@ -29,8 +29,8 @@ export default function Nav({ locale, dict }: { locale: Locale; dict: Dictionary
   return (
     <header className="fixed top-0 z-50 w-full px-4 pt-4 sm:px-6">
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all sm:px-6 ${
-          scrolled ? "glass" : "border border-transparent bg-transparent"
+        className={`glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 transition-all sm:px-6 ${
+          scrolled ? "" : "bg-bg/25"
         }`}
       >
         <Link href={`/${locale}`} className="flex min-w-0 items-center gap-2.5 focus-ring rounded-xl sm:gap-3">
