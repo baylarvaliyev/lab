@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import { createClient } from "@/lib/supabase/server";
-import type { ServiceCategory } from "@/lib/types";
+import type { ServiceCategory, SiteSettings } from "@/lib/types";
 import { isLocale, localized, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
@@ -20,11 +20,18 @@ export default async function Home({
   const dict = getDictionary(locale);
 
   const supabase = await createClient();
-  const { data: categories } = await supabase
-    .from("service_categories")
-    .select("*")
-    .order("sort_order")
-    .returns<ServiceCategory[]>();
+  const [{ data: categories }, { data: settings }] = await Promise.all([
+    supabase
+      .from("service_categories")
+      .select("*")
+      .order("sort_order")
+      .returns<ServiceCategory[]>(),
+    supabase.from("site_settings").select("*").eq("id", 1).maybeSingle<SiteSettings>(),
+  ]);
+
+  const heroVideoUrl = settings?.hero_video_path
+    ? supabase.storage.from("site-assets").getPublicUrl(settings.hero_video_path).data.publicUrl
+    : null;
 
   const missionCards = [
     { title: dict.mission.missionTitle, body: dict.mission.missionBody },
@@ -34,18 +41,37 @@ export default async function Home({
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden pb-20 pt-36 sm:pt-44">
-        <div className="glow-lime pointer-events-none absolute -left-40 top-10 h-[420px] w-[420px] rounded-full blur-3xl" />
-        <div className="glow-emerald pointer-events-none absolute -right-32 top-52 h-[380px] w-[380px] rounded-full blur-3xl" />
+      {/* HERO -- full-bleed looping video (falls back to a static photo) */}
+      <section className="relative h-[92vh] min-h-[600px] w-full overflow-hidden">
+        {heroVideoUrl ? (
+          <video
+            src={heroVideoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <Image
+            src="/images/campus.jpg"
+            alt="Bakı Mühəndislik Universiteti kampusu"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/10" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-bg/70 via-transparent to-transparent" />
 
-        <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 sm:px-8 md:grid-cols-2 md:gap-10">
+        <div className="relative flex h-full max-w-6xl flex-col justify-end px-5 pb-16 pt-36 sm:px-8 sm:pb-24">
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-[13px] text-ink-dim">
+            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-bg/40 px-4 py-1.5 text-[13px] text-ink-dim backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-lime" />
               {dict.home.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-lg font-display text-[2.7rem] font-semibold leading-[1.05] tracking-tight text-ink sm:text-[3.4rem]">
+            <h1 className="mt-5 max-w-2xl font-display text-[2.6rem] font-semibold leading-[1.03] tracking-tight text-ink sm:text-[4.2rem]">
               {dict.home.titleA} <span className="text-gradient">{dict.home.titleHighlight}</span> {dict.home.titleB}
             </h1>
             <p className="mt-6 max-w-md text-[16px] leading-relaxed text-ink-dim">
@@ -64,20 +90,6 @@ export default async function Home({
               >
                 {dict.home.ctaServices}
               </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-line sm:aspect-square">
-              <Image
-                src="/images/campus.jpg"
-                alt="Bakı Mühəndislik Universiteti kampusu"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/40 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>

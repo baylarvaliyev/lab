@@ -47,3 +47,13 @@ export async function deleteService(id: string) {
   revalidatePath("/admin/xidmetler");
   revalidatePath("/xidmetler");
 }
+
+export async function setHeroVideoPath(path: string | null) {
+  const supabase = await createClient();
+  await supabase
+    .from("site_settings")
+    .update({ hero_video_path: path, updated_at: new Date().toISOString() })
+    .eq("id", 1);
+  revalidatePath("/", "layout");
+  revalidatePath("/admin/sayt");
+}

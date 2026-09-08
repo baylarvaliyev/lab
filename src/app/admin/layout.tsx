@@ -40,6 +40,12 @@ export default async function AdminLayout({
             >
               Xidmətlər
             </Link>
+            <Link
+              href="/admin/sayt"
+              className="focus-ring block rounded-lg px-3 py-2 text-[14.5px] text-ink-dim hover:bg-glass hover:text-ink"
+            >
+              Sayt tənzimləmələri
+            </Link>
           </nav>
           <div className="mt-10 border-t border-line-soft pt-5">
             <p className="truncate text-[12.5px] text-ink-dim">{user.email}</p>

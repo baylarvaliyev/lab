@@ -45,3 +45,9 @@ export type SubmissionFile = {
   file_name: string;
   uploaded_at: string;
 };
+
+export type SiteSettings = {
+  id: number;
+  hero_video_path: string | null;
+  updated_at: string;
+};
